@@ -37,6 +37,8 @@ unsigned char Ccpr2HBuff;   // a further buffer to avoid TMR value overwrite
 unsigned char Ccpr2LBuff;
 
 unsigned char TxBuff[32];
+unsigned char TxBuffLen;
+unsigned char TxBuffIndx;
 
 //How many cm for each TIMER1 tick / 2
 //because the echo travels forth and back to the object
