@@ -95,6 +95,55 @@ while (1)  // main loop
 
 
 /* Functions *****************************************************************/
+
+void Uchar2Ascii(unsigned char Indx)
+{/**
+ *\brief compose the TXbuffer string
+  *     converting the unsigned char in 3 ASCII chars
+  *
+ */
+
+	unsigned char u,d,c,tmp,pos,L1,L2;
+
+  pos=Indx*7;                     // position inside the string
+
+	c=Dist[Indx]/100;
+	tmp=(Dist[Indx]-100*c);
+	d=tmp/10;
+	u=tmp-10*d;
+
+  switch(Indx)
+  {
+      case 1:
+          L1='L';
+          L2='L';
+          break;
+
+      case 3:
+          L1='L';
+          L2='C';
+          break;
+
+      case 2:
+          L1='R';
+          L2='C';
+          break;
+
+      case 0:
+          L1='R';
+          L2='R';
+          break;
+  }
+
+	TxBuff[pos+6]=' ';                // separator
+	TxBuff[pos+5]="0123456789"[u];		// units
+	TxBuff[pos+4]="0123456789"[d];		// tens
+	TxBuff[pos+3]=" 123456789"[c];		// hundreds
+  TxBuff[pos+2]=':';
+  TxBuff[pos+1]=L1;                 // description
+  TxBuff[pos+0]=L2;
+}
+
 void TxChar(void)
 {/**
  *\brief load TXREG with the next byte to send
@@ -113,7 +162,10 @@ void SetTxBuffer(void)
  *\brief fill the TX buffer with the ASCII values
   *
  */
-    // to be done  ?????????????????????????????????
+    for(i=0;i<4;i++)
+    {// fill the TXbuff with the characters to display
+        Uchar2Ascii(i);
+    }
     TxBuffLen=28;
     TxBuffIndx=0;
     TX_FLAG=1;
