@@ -73,7 +73,7 @@ while (1)  // main loop
 {	
     if(TIMER0_FLAG)
     {
-        Sonar();
+        Cycle();
     }
 
     if(CAPTURE_FLAG)
@@ -162,7 +162,7 @@ void SetMux(int MuxPort)
     MUX_SELECT_HIGH = MuxPort >> 1;
 }
 
-void Sonar()
+void Cycle()
 {/**
  *\brief set the sequence for 40KHz burst and perform the operation to measure
   *      the echo flying time
