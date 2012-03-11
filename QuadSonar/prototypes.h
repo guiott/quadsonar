@@ -22,4 +22,5 @@ void Echo(void);
 void SelectUS(void);
 void SetTxBuffer(void);
 void TxChar(void);
+void Uchar2Ascii(unsigned char Indx);
 #endif
