@@ -15,7 +15,7 @@ void InterruptHandlerHigh (void);
 void InterruptHandlerLow (void);
 void SetTimer0(int Count);
 void SetPWM(int On);
-void Sonar(void);
+void Cycle(void);
 void ResetTimer1(void);
 void SetMux(int MuxPort);
 void Echo(void);
