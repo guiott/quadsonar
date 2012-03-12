@@ -104,8 +104,7 @@ void Uchar2Ascii(unsigned char Indx)
  */
 
 	unsigned char u,d,c,tmp,pos,L1,L2;
-
-  pos=Indx*7;                     // position inside the string
+  const unsigned char Pos = 7;
 
 	c=Dist[Indx]/100;
 	tmp=(Dist[Indx]-100*c);
@@ -115,23 +114,27 @@ void Uchar2Ascii(unsigned char Indx)
   switch(Indx)
   {
       case 1:
-          L1='L';
-          L2='L';
+          L1='L';    // Left
+          L2='L';    // Left
+          pos=0*Pos; // 1st position inside the string
           break;
 
       case 3:
-          L1='L';
-          L2='C';
+          L1='L';    // Left
+          L2='C';    // Center
+          pos=1*Pos; // 2nd position inside the string
           break;
 
       case 2:
-          L1='R';
-          L2='C';
+          L1='R';     // Right
+          L2='C';     // Center
+          pos=2*Pos;  // 3rd position inside the string
           break;
 
       case 0:
-          L1='R';
-          L2='R';
+          L1='R';     // Right
+          L2='R';     // Right
+          pos=3*Pos;  // 4th position inside the string
           break;
   }
 
