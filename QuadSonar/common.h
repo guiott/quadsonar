@@ -39,7 +39,7 @@
      +30	349,2
     */
     #define TMR1_TICK TCY*PRESCALER1    //TIMER1 tick duration
-    #define SOUND_SPEED 345             //sound speed in m/s at 23*C
+    #define SOUND_SPEED 340             //sound speed in m/s at 23*C
 
     //----- Flags
     #define TIMER0_FLAG VARbits1.bit0	// Timer Interrupt occurred

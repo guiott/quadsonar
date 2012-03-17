@@ -56,7 +56,7 @@ INTCONbits.GIEH=0;	// disable interrupt high
 INTCONbits.GIEL=0;	// disable interrupt low
 
 
-Settings(); // imposta porte e registri (settings.h)
+Settings(); // set ports and peripherals
 
 
 
@@ -103,7 +103,7 @@ void Uchar2Ascii(unsigned char Indx)
   *
  */
 
-	unsigned char u,d,c,tmp,pos,L1,L2;
+	unsigned char u,d,c,tmp,pos,L1,L2,Sep;
   const unsigned char Pos = 7;
 
 	c=Dist[Indx]/100;
@@ -116,29 +116,33 @@ void Uchar2Ascii(unsigned char Indx)
       case 1:
           L1='L';    // Left
           L2='L';    // Left
+          Sep=' ';
           pos=0*Pos; // 1st position inside the string
           break;
 
       case 3:
           L1='L';    // Left
           L2='C';    // Center
+          Sep=' ';
           pos=1*Pos; // 2nd position inside the string
           break;
 
       case 2:
           L1='R';     // Right
           L2='C';     // Center
+          Sep=' ';
           pos=2*Pos;  // 3rd position inside the string
           break;
 
       case 0:
           L1='R';     // Right
           L2='R';     // Right
+          Sep='\r';
           pos=3*Pos;  // 4th position inside the string
           break;
   }
 
-	TxBuff[pos+6]=' ';                // separator
+	TxBuff[pos+6]=Sep;                // separator
 	TxBuff[pos+5]="0123456789"[u];		// units
 	TxBuff[pos+4]="0123456789"[d];		// tens
 	TxBuff[pos+3]=" 123456789"[c];		// hundreds
@@ -169,7 +173,7 @@ void SetTxBuffer(void)
     {// fill the TXbuff with the characters to display
         Uchar2Ascii(i);
     }
-    TxBuffLen=28;
+    TxBuffLen=27;
     TxBuffIndx=0;
     TX_FLAG=1;
 }
