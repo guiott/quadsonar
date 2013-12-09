@@ -7,9 +7,9 @@
 
 #ifndef settings_H
 #define settings_H
-    extern int Timer0_150us;
-    extern int Timer0_850us;
-    extern int Timer0_49ms;
+    extern unsigned int Timer0_150us;
+    extern unsigned int Timer0_850us;
+    extern unsigned int Timer0_49ms;
     extern float CmTick;
 
     extern struct Bits

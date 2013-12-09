@@ -8,8 +8,8 @@
 #ifndef Common_H
     #define Common_H
 
-    #include <p18f2620.h>
-
+    //#include <p18f2620.h>
+    #include <p18cxxx.h>
     #define PLL 1
 
     #ifdef PLL  // 40MHz
@@ -48,6 +48,17 @@
     #define TX_FLAG VARbits1.bit3       // it's time to transmit
 
     //----- Macro
-    #define ABS(x) ((x) > 0 ? (x) : -(x)) // ABS() for int, long, float...
+    #if !defined(MIN)
+        #define MAX(a,b) (((a) > (b)) ? (a) : (b))
+        #define MIN(a,b) (((a) < (b)) ? (a) : (b))
+    #endif
+
+    #if !defined(ABS)
+        #define ABS(x) ((x) > 0 ? (x) : -(x)) // ABS() for int, long, float...
+    #endif
+
+    #define I2C_ADDR 0X24
+    // State 1B flag. If set the following byte will be the register pointer
+    #define I2C_POINTER_FLAG VARbits1.bit4
 
 #endif

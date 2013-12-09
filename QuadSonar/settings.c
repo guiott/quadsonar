@@ -65,9 +65,9 @@ ADCON1bits.PCFG=0b1011;
 
 // period = CLKOUT * prescaler * TMR0
 
-Timer0_150us = 65535 - (0.00015 * FCY / PRESCALER0); // 150us
-Timer0_850us = 65535 - (0.00085 * FCY / PRESCALER0); // 850us
-Timer0_49ms  = 65535 - (0.049   * FCY / PRESCALER0); // 49ms
+Timer0_150us = (unsigned int)(65535 - (0.00015 * FCY / PRESCALER0)); // 150us
+Timer0_850us = (int)(65535 - (0.00085 * FCY / PRESCALER0)); // 850us
+Timer0_49ms  = (int)(65535 - (0.049   * FCY / PRESCALER0)); // 49ms
 TIMER0_FLAG = 0;
 CmTick = TMR1_TICK * SOUND_SPEED * 50;
 
@@ -165,15 +165,16 @@ CVRCONbits.CVRSS=0;         //Comparator reference source, CVRsrc = VDD ? VSS
 CVRCONbits.CVR=3;           //if CVRR=1: CVref =? CVR*0.21 @5V VDD
 
 //------I2C
-/*
-OpenI2C(MASTER, SLEW_OFF);  //Master I2C, slew rate off per clock=100KHz
-SSPADD=99;                  //100KHz baud clock @ 40MHz
-                            //SSPAD=((Fosc/BitRate)/4)-1=(400/4)-1=99
-PIE1bits.SSPIE=1;           //SSP (I2C events) int enabled
-PIE2bits.BCLIE=1;           //BUS COLLISION int enabled
-IPR1bits.SSPIP=0;           //SSP int = low priority
-IPR2bits.BCLIP=0;           //BUS COLLISION int = low priority
-*/
+SSPADD = I2C_ADDR << 1; //Address shifted to the upper bits (7:1)
+SSPCON1bits.SSPEN = 1;  //Enable I2C on I/O pins
+SSPCON1bits.CKP = 1;    //Release clock
+SSPCON1bits.SSPM = 6;   //I2C Slave mode, 7-bit address
+SSPCON2bits.SEN = 1;    //Clock stretching enabled
+SSPSTATbits.SMP = 1;    //Standard speed mode
+SSPBUF = 0;
+
+I2C_POINTER_FLAG = 0;   // reset State 1B
+
 
 //-------Interrupts
 RCONbits.IPEN=1;        //interrupt priority enabled
@@ -182,35 +183,9 @@ INTCON2bits.TMR0IP=1;   //TMR0 interrupt high priority
 PIE2bits.CCP2IE=0;      //CCP2 int enabled only when needed
 IPR2bits.CCP2IP=0;      //CCP2 interrupt high priority
 
-//-------Not used Peripheral Interrupts
-PIE1bits.TMR2IE=0;	//interrupt on TMR2 overflow disabled
-PIE1bits.TMR1IE=0;	//interrupt on TMR1 overflow disabled
-PIE2bits.TMR3IE=0;	//interrupt on TMR3 overflow disabled
-PIE1bits.ADIE=0;        //AD int disabled
-PIE1bits.RCIE=0;        //USART RX int disabled
-PIE1bits.TXIE=0;        //USART TX int disabled
-PIE1bits.CCP1IE=0;	//CCP1 int disabled
-PIE2bits.EEIE=0;        //EEPROM int disabled
-PIE2bits.LVDIE=0;       //LOW VOLTAGE int disabled
-
-
-//-------Interrupt flags
-//INTCON3bits.INT1IF    //  interrupt on INT1
-//INTCON3bits.INT2IF    //  interrupt on INT2
-//INTCONbits.INT0IF     //  interrupt on INT0
-//PIR1bits.TMR2IF       //  interrupt on TMR2 overflow
-//PIR1bits.TMR1IF       //  interrupt on TMR1 overflow
-//PIR1bits.PSPIF        //  PSP int
-//PIR1bits.ADIF         //  AD int
-//PIR1bits.RCIF         //  USART RXint
-//PIR1bits.TXIF         //  USART TX int
-//PIR1bits.SSPF         //  SSP int
-//PIR1bits.CCP1IF       //  CCP1 int
-//PIR2bits.CCP2IF       //  CCP2 int
-//PIR2bits.EEIF         //  EEPROM int
-//PIR2bits.BCLIF        //  BUS COLLISION int
-//PIR2bits.LVDIF        //  LOW VOLTAGE int
-//PIR2bits.TMR3IF       //  interrupt on TMR3 overflow
+PIR1bits.SSPIF = 0;     //Clear MSSP Interrupt flag
+PIE1bits.SSPIE=1;       //SSP (I2C events) int enabled
+IPR1bits.SSPIP=1;       //SSP int = high priority
 
 }
 /*settings*********************************************************************/

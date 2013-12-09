@@ -15,12 +15,11 @@
 	#pragma config OSC = HS     //	20Mhz
 #endif
 
-#pragma config WDT = OFF
+#pragma config WDT = ON
+#pragma config WDTPS = 256 //1s#pragma config LVP = OFF
 #pragma config LVP = OFF
-#pragma config BOREN = OFF
+#pragma config BOREN = SBORDIS
+#pragma config BORV = 1
 #pragma config CCP2MX = PORTC   // CCP2 capture on pin RC1
-
-//#pragma config PWRT = ON not compatible with ICD2
-//#pragma config XINST = ON
 
 #endif

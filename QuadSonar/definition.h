@@ -48,4 +48,15 @@ float CmTick;
 #define MUX_SELECT_LOW PORTBbits.RB4    //Multiplexer select MSB
 #define MUX_SELECT_HIGH PORTBbits.RB5   //Multiplexer select LSB
 
+//I2C definitions
+unsigned char I2cRegPtr;//Pointer to first byte to read or write in the register
+
+//TX registers array
+#define I2C_BUFF_SIZE_TX 7
+unsigned char I2cRegTx[I2C_BUFF_SIZE_TX]={0,0,0,0,0,0,0};//TX registers array
+
+#define I2C_BUFF_SIZE_RX 7
+
+unsigned char I2cRegRx[I2C_BUFF_SIZE_RX]={0,0,0,0,0,0,0};
+
 #endif
