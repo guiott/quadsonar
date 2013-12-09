@@ -1,13 +1,13 @@
 /* //////////////////////////////////////////////////////////////////////////////////////
 ** File:      QuadSonar.c
 */                                  
-#define  Ver "QuadSonar v.0.9.1\r       by Guiott"
+#define  Ver "QuadSonar v.1.0.0\r       by Guiott"
 
 /**
 * \mainpage QuadSonar.c
 * \author    Guido Ottaviani-->guido@guiott.com<--
-* \version 0.9.1
-* \date 07/12
+* \version 1.0.0
+* \date 12/13
 * \details This software drives a chinese parking sensors instead of the
  * original 8051 based controller to achieve a waterproof, quadruple
  * Sonar Range Finder.
