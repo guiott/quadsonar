@@ -1,0 +1,23 @@
+___awdiv: CODE, 7114 0 176
+_SetMux: CODE, 7846 0 38
+__stringdata: SMALLCONST, 4097 0 22
+_SetTxBuffer: CODE, 7790 0 56
+___ftpack: CODE, 7290 0 168
+_TxChar: CODE, 7884 0 36
+_main: CODE, 7664 0 68
+_Cycle: CODE, 6918 0 196
+_SetTimer0: CODE, 7986 0 20
+_high_isr: CODE, 8 0 5948
+_SetPWM: CODE, 7920 0 36
+_Uchar2Ascii: CODE, 4120 0 694
+__initialization: CODE, 7956 0 24
+___ftmul: CODE, 6326 0 348
+___awtoft: CODE, 7580 0 84
+_Settings: CODE, 6674 0 244
+_ResetTimer1: CODE, 8006 0 10
+_SetDCPWM1: CODE, 7732 0 58
+_SelectUS: CODE, 4814 0 682
+___fttol: CODE, 5956 0 370
+_low_isr: CODE, 24 0 156
+_Echo: CODE, 7458 0 122
+Total: 9556

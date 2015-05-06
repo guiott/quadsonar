@@ -1,13 +1,13 @@
 /* //////////////////////////////////////////////////////////////////////////////////////
 ** File:      QuadSonar.c
 */                                  
-#define  Ver "QuadSonar v.1.0.0\r       by Guiott"
+#define  Ver "QuadSonar v.1.0.1\r       by Guiott"
 
 /**
 * \mainpage QuadSonar.c
 * \author    Guido Ottaviani-->guido@guiott.com<--
-* \version 1.0.0
-* \date 12/13
+* \version 1.0.1
+* \date 05/15
 * \details This software drives a chinese parking sensors instead of the
  * original 8051 based controller to achieve a waterproof, quadruple
  * Sonar Range Finder.
@@ -218,13 +218,19 @@ void SelectUS(void)
   * http://www.guiott.com/QuadSonar/HR/LinoSonar.png
  */
 
-    #define MIN_DIFF 3 // min dist in cm to be considered the same object
+    #define MIN_DIFF 10 // min dist in cm to be considered the same object
     int DistDiff;
 
     UsIndx++;
     if (UsIndx>3)
     {// a full cycle is over.
         UsIndx=0;
+
+        //store the raw values
+        I2cRegTx[7] = Dist[1];  // LL
+        I2cRegTx[8] = Dist[3];  // CL
+        I2cRegTx[9] = Dist[2];  // CR
+        I2cRegTx[10]= Dist[0];  // RR
 
         // extrapolation of intermediate values
         if(ABS(Dist[1] - Dist[3]) < MIN_DIFF)

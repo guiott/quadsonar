@@ -52,8 +52,8 @@ float CmTick;
 unsigned char I2cRegPtr;//Pointer to first byte to read or write in the register
 
 //TX registers array
-#define I2C_BUFF_SIZE_TX 7
-unsigned char I2cRegTx[I2C_BUFF_SIZE_TX]={0,0,0,0,0,0,0};//TX registers array
+#define I2C_BUFF_SIZE_TX 11//7 for the corrected measures + 4 for the raw values
+unsigned char I2cRegTx[I2C_BUFF_SIZE_TX]={0,0,0,0,0,0,0,0,0,0,0};//TX registers array
 
 #define I2C_BUFF_SIZE_RX 7
 
